@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liberty Brew · Craft Lager a Montgomery County</title>
+  <meta name="description" content="Liberty Brew, birrificio artigianale di Montgomery County specializzato in lager: visite guidate, taproom e birre freschissime.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0f;
+      --bg-alt: #13131a;
+      --accent: #f4a259;
+      --accent-soft: rgba(244,162,89,0.15);
+      --text: #f7f7f7;
+      --muted: #a5a5b5;
+      --card: #181820;
+      --radius-lg: 1.5rem;
+      --radius-md: 1rem;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.45);
+      --shadow-light: 0 10px 25px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1f1f2b 0, #050509 55%, #020205 100%);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(5,5,10,0.92), rgba(5,5,10,0.75), transparent);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: .9rem;
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffe0b5, #f4a259 45%, #9c4b1f 100%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.05);
+      position: relative; overflow: hidden;
+    }
+    .logo-mark::after {
+      content: "";
+      width: 80%; height: 2px;
+      position: absolute; bottom: 7px; left: 10%;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.35);
+    }
+    .logo-mark span {
+      font-size: 1.1rem;
+      color: #1b1208;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.9rem;
+    }
+    .nav-links a {
+      position: relative;
+      color: var(--muted);
+      transition: color .2s ease;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -0.2rem;
+      width: 0; height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width .2s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(244,162,89,0.8);
+      background: radial-gradient(circle at top left, rgba(244,162,89,0.35), transparent 55%);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #ffe9d4;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      background: radial-gradient(circle at top left, rgba(244,162,89,0.6), transparent 60%);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    section { padding: 4rem 0; }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-bottom: .8rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      color: var(--muted);
+      max-width: 34rem;
+      margin-bottom: 1.8rem;
+      font-size: 0.97rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #f4a259, #ffb774);
+      color: #2b1a0b;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 55px rgba(0,0,0,0.75);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow-light);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .hero-meta span strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-right { position: relative; }
+    .hero-card {
+      background: radial-gradient(circle at top, rgba(244,162,89,0.22), rgba(14,14,22,0.98));
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bottle-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 1rem;
+      height: 220px;
+      position: relative;
+    }
+    .bottle {
+      width: 90px;
+      height: 210px;
+      border-radius: 40px 40px 18px 18px;
+      background: linear-gradient(180deg, #f4a259 0%, #b0551c 55%, #5a2710 100%);
+      box-shadow: 0 24px 40px rgba(0,0,0,0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .bottle::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.35), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+    }
+    .bottle-neck {
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 55px;
+      background: linear-gradient(180deg, #f6f6f6, #dedede);
+      border-radius: 18px 18px 6px 6px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.35);
+    }
+    .bottle-neck::after {
+      content: "";
+      position: absolute;
+      inset: 3px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.76);
+      opacity: 0.85;
+      filter: blur(0.2px);
+    }
+    .bubble.b1 { width: 6px; height: 6px; left: 15px; bottom: 45px; }
+    .bubble.b2 { width: 8px; height: 8px; left: 38px; bottom: 80px; opacity: 0.7; }
+    .bubble.b3 { width: 5px; height: 5px; left: 60px; bottom: 60px; opacity: 0.6; }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: rgba(11,11,17,0.9);
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+    .badge span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-card h2 { font-size: 1.05rem; margin-bottom: .25rem; }
+    .hero-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero-specs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 0.75rem;
+      font-size: 0.78rem;
+    }
+    .hero-specs div {
+      background: rgba(3,3,6,0.6);
+      border-radius: 0.75rem;
+      padding: 0.5rem 0.7rem;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero-specs div span { display: block; color: var(--muted); }
+    .hero-specs div strong { font-size: 0.9rem; }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 36rem;
+    }
+
+    .beers { border-top: 1px solid rgba(255,255,255,0.03); }
+
+    .beer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+    }
+    .beer-card {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      padding: 1.4rem 1.5rem;
+      box-shadow: var(--shadow-light);
+      border: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+    .beer-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .beer-name { font-weight: 600; margin-bottom: 0.3rem; }
+    .beer-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+    .beer-meta span + span::before {
+      content: "•";
+      margin: 0 0.4rem;
+      color: rgba(255,255,255,0.21);
+    }
+    .beer-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .beer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .pill {
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 0.18rem 0.6rem;
+      font-size: 0.75rem;
+      color: #ffdcb5;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+    .highlight {
+      background: rgba(255,255,255,0.02);
+      border-radius: var(--radius-md);
+      padding: 1.3rem 1.4rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .highlight strong { color: var(--accent); }
+
+    .timeline {
+      list-style: none;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .timeline li {
+      margin-bottom: 0.4rem;
+      position: relative;
+      padding-left: 0.9rem;
+    }
+    .timeline li::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      position: absolute;
+      left: 0; top: 0.45rem;
+    }
+
+    .visit-card {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    .visit-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .visit-info { margin: 0.5rem 0 1rem; }
+    .visit-info p { margin-bottom: 0.2rem; }
+
+    .contact { border-top: 1px solid rgba(255,255,255,0.03); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);
+      gap: 2rem;
+    }
+
+    form { display: grid; gap: 0.9rem; }
+    label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+      display: inline-block;
+    }
+    input, textarea, select {
+      width: 100%;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.65rem 0.8rem;
+      background: rgba(4,4,8,0.9);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(244,162,89,0.5);
+      background: rgba(7,7,12,1);
+    }
+    textarea { min-height: 110px; resize: vertical; }
+
+    .contact-aside {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .contact-aside h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+    .contact-aside p { margin-bottom: 0.6rem; }
+    .contact-list { list-style: none; font-size: 0.86rem; }
+    .contact-list li { margin-bottom: 0.3rem; }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.3rem 1.5rem 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: minmax(0,1fr); }
+      .hero-right { order: -1; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 720px) {
+      main { padding-inline: 1.1rem; }
+      section { padding: 3rem 0; }
+      .story-grid,
+      .contact-grid { grid-template-columns: minmax(0,1fr); }
+      footer { padding-inline: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="logo">
+        <div class="logo-mark"><span>L</span></div>
+        <span>Liberty Brew</span>
+      </div>
+      <div class="nav-links">
+        <a href="#birre">Le lager</a>
+        <a href="#storia">Storia & Visite</a>
+        <a href="#contatti">Contatti</a>
+      </div>
+      <a href="#contatti" class="nav-cta">Prenota una degustazione</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div>
+        <p class="eyebrow">Craft lager · Montgomery County</p>
+        <h1>Lager <span>pulite, croccanti</span> e dannatamente bevibili.</h1>
+        <p>
+          Liberty Brew è un piccolo birrificio indipendente di Montgomery County che produce
+          solo lager artigianali: fermentazioni lente, temperature controllate e massima
+          attenzione all’equilibrio nel bicchiere.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="document.getElementById('birre').scrollIntoView({behavior:'smooth'})">
+            Scopri le nostre lager
+          </button>
+          <button class="btn btn-ghost" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
+            Visita il birrificio
+          </button>
+        </div>
+        <div class="hero-meta">
+          <span><strong>3</strong> lager fisse</span>
+          <span><strong>+ stagionali</strong> in edizione limitata</span>
+          <span><strong>100%</strong> produzione indipendente</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <article class="hero-card" aria-label="Anteprima di una birra Liberty Brew">
+          <div class="bottle-wrap">
+            <div class="bottle">
+              <div class="bottle-neck"></div>
+              <span class="bubble b1"></span>
+              <span class="bubble b2"></span>
+              <span class="bubble b3"></span>
+            </div>
+          </div>
+          <div class="badge"><span>Flagship</span> craft lager</div>
+          <h2>Liberty House Lager</h2>
+          <p>
+            Dorata, secca e incredibilmente facile da bere. La lager che teniamo sempre
+            in linea in taproom.
+          </p>
+          <div class="hero-specs">
+            <div>
+              <span>Gradazione alcolica</span>
+              <strong>4.8% ABV</strong>
+            </div>
+            <div>
+              <span>Amaro</span>
+              <strong>18 IBU</strong>
+            </div>
+            <div>
+              <span>Stile</span>
+              <strong>Helles Lager</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- BEERS -->
+    <section class="beers" id="birre">
+      <h2 class="section-title">Le nostre lager</h2>
+      <p class="section-subtitle">
+        Facciamo una cosa sola, ma la facciamo bene: lager. Dalla chiara quotidiana alla
+        pilsner luppolata fino alla dunkel da serata lunga.
+      </p>
+
+      <div class="beer-grid">
+        <article class="beer-card">
+          <p class="beer-tag">Helles Lager</p>
+          <h3 class="beer-name">Liberty House Lager</h3>
+          <p class="beer-meta">
+            <span>4.8% ABV</span>
+            <span>18 IBU</span>
+            <span>Chiara</span>
+          </p>
+          <p class="beer-desc">
+            Colore dorato chiaro, schiuma fine e persistente. Pane fresco, miele delicato
+            e un finale secco che ti fa dire “ancora una pinta”.
+          </p>
+          <div class="beer-bottom">
+            <span class="pill">Servire a 5–6°C</span>
+            <span>Perfetta tutti i giorni</span>
+          </div>
+        </article>
+
+        <article class="beer-card">
+          <p class="beer-tag">Pilsner</p>
+          <h3 class="beer-name">Montgomery Pils</h3>
+          <p class="beer-meta">
+            <span>5.2% ABV</span>
+            <span>32 IBU</span>
+            <span>Pilsner secca</span>
+          </p>
+          <p class="beer-desc">
+            Luppolatura decisa, note erbacee e floreali, amaro elegante. Nata per gli
+            amanti delle pils “crisp” in pieno stile europeo.
+          </p>
+          <div class="beer-bottom">
+            <span class="pill">Luppoli nobili europei</span>
+            <span>Ottima con pizza e burger</span>
+          </div>
+        </article>
+
+        <article class="beer-card">
+          <p class="beer-tag">Dunkel</p>
+          <h3 class="beer-name">County Dark Lager</h3>
+          <p class="beer-meta">
+            <span>5.5% ABV</span>
+            <span>24 IBU</span>
+            <span>Scura</span>
+          </p>
+          <p class="beer-desc">
+            Colore ambrato scuro, note di caramello, biscotto e un tocco di cacao.
+            Morbida ma asciutta: lager scura da sessione.
+          </p>
+          <div class="beer-bottom">
+            <span class="pill">Servire a 8–10°C</span>
+            <span>Ideale con BBQ & formaggi</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- STORY / VISITS -->
+    <section id="storia">
+      <div class="story-grid">
+        <div>
+          <h2 class="section-title">Liberty Brew, in breve</h2>
+          <p class="section-subtitle">
+            Siamo nati dall’idea semplice di portare lager freschissima e locale a
+            Montgomery County. Fermentazioni lente, tank laghering e nessuna scorciatoia.
+          </p>
+          <article class="highlight">
+            Crediamo che la lager sia la birra più sincera: <strong>non puoi nasconderti
+            dietro ai luppoli</strong>. Per questo curiamo ogni dettaglio, dall’acqua
+            al tempo di maturazione.
+            <ul class="timeline">
+              <li>2018 – Prime cotte pilota nel garage.</li>
+              <li>2020 – Apertura del microbirrificio a Montgomery County.</li>
+              <li>2022 – Inaugurazione della taproom con 6 spine.</li>
+              <li>Oggi – Collaborazioni locali e lager stagionali a rotazione.</li>
+            </ul>
+          </article>
+        </div>
+
+        <aside class="visit-card">
+          <h3>Visita la brewery</h3>
+          <p>
+            Tour guidato tra impianti, spiegazione delle nostre tecniche di lagerizzazione
+            e degustazione di tre birre direttamente dai tank o dalla spina.
+          </p>
+          <div class="visit-info">
+            <p><strong>Quando:</strong> venerdì 18–21 · sabato 16–20</p>
+            <p><strong>Dove:</strong> Liberty Brew · Montgomery County (MD)</p>
+          </div>
+          <button class="btn btn-primary" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">
+            Prenota il tour
+          </button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contatti">
+      <h2 class="section-title">Contattaci</h2>
+      <p class="section-subtitle">
+        Sei un locale della zona, vuoi organizzare un evento o prenotare una visita in
+        birrificio? Scrivici: parliamone davanti a una lager.
+      </p>
+
+      <div class="contact-grid">
+        <form onsubmit="event.preventDefault(); alert('Grazie! Il tuo messaggio è stato inviato (demo).');">
+          <div>
+            <label for="name">Nome e cognome</label>
+            <input id="name" type="text" required placeholder="Es. Mario Rossi">
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" required placeholder="nome@esempio.it">
+          </div>
+          <div>
+            <label for="topic">Motivo del contatto</label>
+            <select id="topic">
+              <option>Visita / degustazione</option>
+              <option>Fusti per locale</option>
+              <option>Evento privato</option>
+              <option>Altro</option>
+            </select>
+          </div>
+          <div>
+            <label for="message">Messaggio</label>
+            <textarea id="message" placeholder="Scrivici cosa hai in mente..."></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+        </form>
+
+        <aside class="contact-aside">
+          <h3>Dove trovarci</h3>
+          <p>
+            Taproom aperta nel weekend, lager sempre fresche alla spina e possibilità
+            di take-away in growler e lattine.
+          </p>
+          <ul class="contact-list">
+            <li><strong>Email:</strong> info@libertybrew.com</li>
+            <li><strong>Telefono:</strong> +1 (000) 000-0000</li>
+            <li><strong>Instagram:</strong> @libertybrewmoco</li>
+          </ul>
+          <p style="margin-top:0.8rem;">
+            <small>Bevi responsabilmente. Le nostre birre sono destinate esclusivamente a maggiorenni.</small>
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Liberty Brew · Montgomery County</span>
+    <span>Sito demo — personalizza indirizzo e contatti reali.</span>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
